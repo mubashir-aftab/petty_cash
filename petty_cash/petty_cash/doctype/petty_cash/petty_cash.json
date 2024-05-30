@@ -1,0 +1,89 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "P-C.####",
+ "creation": "2024-05-30 11:59:12.731872",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "full_name",
+  "column_break_27lwe",
+  "month",
+  "amount",
+  "column_break_0kc1v",
+  "remainings_of_last_month",
+  "total_petty_this_month"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Full Name"
+  },
+  {
+   "fieldname": "month",
+   "fieldtype": "Date",
+   "label": "Month"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Int",
+   "label": "Amount "
+  },
+  {
+   "fieldname": "remainings_of_last_month",
+   "fieldtype": "Int",
+   "label": "Remainings of last Month",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_27lwe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_0kc1v",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_petty_this_month",
+   "fieldtype": "Int",
+   "label": "Total petty this Month ",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-05-30 16:08:06.309502",
+ "modified_by": "Administrator",
+ "module": "Petty Cash",
+ "name": "Petty Cash",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

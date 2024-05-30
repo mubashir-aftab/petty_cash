@@ -1,0 +1,96 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-05-30 12:23:46.640695",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "petty_cash",
+  "employee_name",
+  "month",
+  "amount",
+  "months_expenses",
+  "amended_from",
+  "total_amount",
+  "remaining_amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "petty_cash",
+   "fieldtype": "Link",
+   "label": "Petty Cash",
+   "options": "Petty Cash"
+  },
+  {
+   "fetch_from": "petty_cash.full_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name"
+  },
+  {
+   "fetch_from": "petty_cash.month",
+   "fieldname": "month",
+   "fieldtype": "Data",
+   "label": "Month"
+  },
+  {
+   "fetch_from": "petty_cash.total_petty_this_month",
+   "fieldname": "amount",
+   "fieldtype": "Int",
+   "label": "Amount"
+  },
+  {
+   "fieldname": "months_expenses",
+   "fieldtype": "Table",
+   "label": "Month's Expenses",
+   "options": "Expenses Child"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Expences",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Int",
+   "label": "Total Amount "
+  },
+  {
+   "fieldname": "remaining_amount",
+   "fieldtype": "Int",
+   "label": "Remaining Amount"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-05-31 01:32:50.260935",
+ "modified_by": "Administrator",
+ "module": "Petty Cash",
+ "name": "Expences",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
