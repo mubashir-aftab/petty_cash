@@ -14,8 +14,7 @@
   "month",
   "amount",
   "column_break_0kc1v",
-  "remainings_of_last_month",
-  "total_petty_this_month"
+  "remainings_petty"
  ],
  "fields": [
   {
@@ -41,12 +40,6 @@
    "label": "Amount "
   },
   {
-   "fieldname": "remainings_of_last_month",
-   "fieldtype": "Int",
-   "label": "Remainings of last Month",
-   "read_only": 1
-  },
-  {
    "fieldname": "column_break_27lwe",
    "fieldtype": "Column Break"
   },
@@ -55,15 +48,15 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "total_petty_this_month",
+   "fieldname": "remainings_petty",
    "fieldtype": "Int",
-   "label": "Total petty this Month ",
+   "label": "Remainings Petty",
    "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-05-30 16:08:06.309502",
+ "modified": "2024-05-31 12:15:17.686791",
  "modified_by": "Administrator",
  "module": "Petty Cash",
  "name": "Petty Cash",

@@ -11,17 +11,7 @@ class Expences(Document):
             if self.amount is not None:
                    self.remaining_amount = self.amount - self.total_amount  
                 #    frappe.msgprint(str(self.remaining_amount))
-            # create a new document
-        #     doc = frappe.get_doc('Petty Cash', self.petty_cash)
-        #     doc.remainings_of_last_month=self.remaining_amount
-        #     total_amount=doc.amount+doc.remainings_of_last_month
-        #     doc.total_petty_this_month=total_amount
-        #     doc.save()
-
-        #     doc=frappe.set_value('Petty Cash', self.petty_cash,'remainings_of_last_month',self.remaining_amount)
-                
-        #     doc.remainings_of_last_month = self.remaining_amount
-        #     frappe.msgprint(str(doc.remainings_of_last_month))
+            frappe.db.set_value('Petty Cash', self.petty_cash, 'remainings_petty', self.remaining_amount, update_modified=False)
             
 
             for row in self.months_expenses:
@@ -29,3 +19,18 @@ class Expences(Document):
                             if not row.reason:
                                     frappe.throw(('Reason is mandatory when Receipt Image is empty in row {0}').format(row.idx))
         # pass
+
+
+
+
+
+
+        # total_amount=doc.amount+doc.remainings_of_last_month
+        #     doc.total_petty_this_month=total_amount
+        #     doc.save()
+
+            # doc=frappe.set_value('Petty Cash', self.petty_cash,'remainings_of_last_month',self.remaining_amount)
+                
+        #     doc.remainings_of_last_month = self.remaining_amount
+        #     frappe.msgprint(str(doc.remainings_of_last_month))
+            # doc.save()

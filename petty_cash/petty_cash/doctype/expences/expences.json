@@ -30,13 +30,12 @@
    "label": "Employee Name"
   },
   {
-   "fetch_from": "petty_cash.month",
    "fieldname": "month",
-   "fieldtype": "Data",
+   "fieldtype": "Date",
    "label": "Month"
   },
   {
-   "fetch_from": "petty_cash.total_petty_this_month",
+   "fetch_from": "petty_cash.amount",
    "fieldname": "amount",
    "fieldtype": "Int",
    "label": "Amount"
@@ -71,7 +70,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-05-31 01:32:50.260935",
+ "modified": "2024-05-31 16:09:34.884022",
  "modified_by": "Administrator",
  "module": "Petty Cash",
  "name": "Expences",
