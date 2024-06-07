@@ -10,6 +10,7 @@
  "field_order": [
   "employee",
   "full_name",
+  "designation",
   "column_break_27lwe",
   "month",
   "amount",
@@ -52,11 +53,17 @@
    "fieldtype": "Int",
    "label": "Remainings Petty",
    "read_only": 1
+  },
+  {
+   "fetch_from": "employee.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-05-31 12:15:17.686791",
+ "modified": "2024-06-03 15:32:32.147082",
  "modified_by": "Administrator",
  "module": "Petty Cash",
  "name": "Petty Cash",

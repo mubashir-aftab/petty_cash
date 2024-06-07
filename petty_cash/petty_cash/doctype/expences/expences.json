@@ -9,6 +9,7 @@
  "field_order": [
   "petty_cash",
   "employee_name",
+  "desigination",
   "month",
   "amount",
   "months_expenses",
@@ -65,12 +66,18 @@
    "fieldname": "remaining_amount",
    "fieldtype": "Int",
    "label": "Remaining Amount"
+  },
+  {
+   "fetch_from": "petty_cash.designation",
+   "fieldname": "desigination",
+   "fieldtype": "Data",
+   "label": "Desigination"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-05-31 16:09:34.884022",
+ "modified": "2024-06-03 15:52:01.628239",
  "modified_by": "Administrator",
  "module": "Petty Cash",
  "name": "Expences",

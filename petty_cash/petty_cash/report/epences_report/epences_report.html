@@ -1,0 +1,128 @@
+<style>
+
+	.company_name {
+		font-size: 1.2rem;
+		line-height: 1.8rem;
+		margin: 0;
+		font-weight: 700;
+	}
+
+	.flex-c {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+	.company_name {
+		margin-left: calc(50% - 150px) !important;
+		transform: translateX(-50%);
+		text-align: center;
+	}
+</style>
+
+<div class="flex-c">
+
+	<p class="company_name">Petty  Cash<br>Monthly Expneces REPORT </p>
+</div>
+
+
+
+
+<br>
+<table class="table table-bordered">
+	<!-- heading -->
+	<thead>
+		<tr>
+		<th> # </th>
+		{% for col in columns %}
+			{% if col.name && col._id !== "_check" %}  
+			<th
+				{% if col.minWidth %}
+					style="min-width: {{ col.minWidth }}px"
+				{% endif %}
+				{% if col.docfield && frappe.model.is_numeric_field(col.docfield) %}
+					class="text-right"
+				{% endif %}
+			>
+				{{ __(col.name) }}</th>
+			{% endif %}
+		{% endfor %}
+		</tr>
+	</thead>
+	<!-- body -->
+	<tbody>
+		{% for row in data %}
+			<tr style="height: 30px">
+			<td {% if row.bold == 1 %} style="font-weight: bold" {% endif %}>
+				<span> {{ row._index + 1 }} </span>
+			</td>
+			{% for col in columns %}
+				{% if col.name && col._id !== "_check" %}
+					{% var value = col.fieldname ? row[col.fieldname] : row[col.id] %}
+					{% var longest_word = cstr(value).split(' ').reduce((longest, word) => word.length > longest.length ? word : longest, ''); %}
+					<td {% if row.bold == 1 %} style="font-weight: bold" {% endif %} {% if longest_word.length > 45 %} class="overflow-wrap-anywhere" {% endif %}>
+						<span {% if col._index == 0 %} style="padding-left: {%= cint(row.indent) * 2 %}em" {% endif %}>
+							{% format_data = row.is_total_row && ["Currency", "Float"].includes(col.fieldtype) ? data[0] : row %}
+							{% if (row.is_total_row && col._index == 0) { %}
+								{{ __("Total") }}
+							{% } else { %}
+								{{
+									col.formatter
+										? col.formatter(row._index, col._index, value, col, format_data, true)
+										: col.format
+											? col.format(value, row, col, format_data)
+											: col.docfield
+												? frappe.format(value, col.docfield)
+												: value
+								}}
+							{% } %}
+						</span>
+					</td>
+				{% endif %}
+			{% endfor %}
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+
+
+<!-- <style>
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 80%;
+        margin: 100px;
+		margin-left: 270px;
+    }
+    .left-fields{
+		flex: 1;
+		margin-left: 140px;
+	}
+    .right-fields {
+        flex: 1;
+    }
+    .field {
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="container">
+    <div class="left-fields">
+        <div class="field">
+            <label for="field1">Prepared by: Powersoft</label>
+        </div>
+        <div class="field">
+            <label for="field2">Checked by: Demo</label>
+        </div>
+    </div>
+    <div class="right-fields">
+        <div class="field">
+            <label for="field3">Authorized Signatory 1: ………………………………</label>
+        </div>
+        <div class="field">
+            <label for="field4">Authorized Signatory 2: ………………………………</label>
+        </div>
+    </div>
+</div> -->

@@ -8,13 +8,14 @@ frappe.ui.form.on('Expences', {
             let year = _date.getFullYear();
             
             // Calculate the start date
-            let start_date = year + '-' + ('0' + month).slice(-2) + '-01';
+            let start_date = year + '-' + month + '-01';
             
             // Calculate the end date by getting the first day of the next month and subtracting one day
-            let next_month = new Date(year, month, 1); // This will be the first day of the next month
-            next_month.setDate(next_month.getDate() - 1); // Subtract one day to get the last day of the current month
+            // let next_month = new Date(year, month, 1); // This will be the first day of the next month
+            // next_month.setDate(next_month.getDate() - 1); // Subtract one day to get the last day of the current month
             
-            let end_date = next_month.toISOString().split('T')[0];
+            // let end_date = next_month.toISOString().split('T')[0];
+            let end_date = year + '-' + month + '-31';
             
             console.log(month, start_date, end_date);
 

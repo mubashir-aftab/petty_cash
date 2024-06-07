@@ -3,6 +3,31 @@
 /* eslint-disable */
 
 frappe.query_reports["Epences Report"] = {
+    onload: function (report) {
+        var defaultCustomer = frappe.defaults.get_default("customer");
+        
+        
+                
+                frappe.db.get_doc('Expences', expenses.name)
+                    .then(doc => {
+                        if (doc.items && doc.items.length > 0) {
+                            let item = doc.items[0];
+                            console.log(doc);
+                            
+                            localStorage.setItem("customer", JSON.stringify({ 
+                                employee_name: doc.employee_name,
+                                desigination:doc.desigination,
+                                // month:doc.month,
+                                // amount:doc.amount,
+                                // total_amount:total_amount,
+                                // remaining_amount:remaining_amount,
+                                // item_name: item.item_name,
+                                // item_code: item.item_code,
+                                // amount: item.amount
+                            }));
+                        }
+                    });
+	},
 	"filters": [
         {
             "fieldname": "petty_cash",
@@ -12,16 +37,14 @@ frappe.query_reports["Epences Report"] = {
             "default": null
         },
         {
-            "fieldname": "employee_name",
-            "label": __("Employee Name"),
-            "fieldtype": "Data",
-            "default": null
+            "fieldname": "from_date",
+            "label": __("From_Date"),
+            "fieldtype": "Date"
         },
-        // {
-        //     "fieldname": "month",
-        //     "label": __("Month"),
-        //     "fieldtype": "Data",
-        //     "default": null
-        // }
+        {
+            "fieldname": "to_date",
+            "label": __("To_Date"),
+            "fieldtype": "Date"
+        },
     ]
 };

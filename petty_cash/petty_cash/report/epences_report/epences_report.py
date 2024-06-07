@@ -24,10 +24,16 @@ def get_columns():
          "fieldname": "employee_name", 
          "fieldtype": "Data", 
          "width": 150
+        }
+        ,
+        {"label": ("Desigination"), 
+         "fieldname": "designation", 
+         "fieldtype": "Data", 
+         "width": 150
         },
         {"label": ("Month"), 
          "fieldname": "month", 
-         "fieldtype": "Data", 
+         "fieldtype": "Date", 
          "width": 100
         },
         {"label": ("Amount"), 
@@ -80,29 +86,30 @@ def get_data(filters):
         conditions["petty_cash"] = filters.get("petty_cash")
     if filters.get("employee_name"):
         conditions["employee_name"] = filters.get("employee_name")
-    if filters.get("month"):
-        conditions["month"] = filters.get("month")
+    if filters.get("from_date") and filters.get("to_date"):
+        conditions["expense_date"] = ["between", [filters.get("from_date"), filters.get("to_date")]]
     
-    expenses = frappe.get_all('Expences',filters=conditions, fields=['name', 'petty_cash', 'employee_name', 'month', 'amount', 'total_amount', 'remaining_amount'])
-    
+    expenses = frappe.get_all('Expences',filters=conditions, fields=['name', 'petty_cash', 'employee_name', 'month', 'amount', 'total_amount', 'remaining_amount','desigination'])
     for exp in expenses:
+        # frappe.msgprint(f"{len(exp.desigination)}")
+        # frappe.msgprint(exp.month)
         
         months_expenses = frappe.get_all('Expenses Child', filters={'parent': exp.name}, fields=['expense_date', 'receipt_image', 'expense_category', 'amount', 'reason'])
-        
         for child in months_expenses:
-            row = {
-                "petty_cash": exp.petty_cash,
-                "employee_name": exp.employee_name,
-                "month": exp.month,
-                "amount": exp.amount,
-                "expense_date": child.expense_date,
-                "receipt_image": child.receipt_image,
-                "expense_category": child.expense_category,
-                "expense_amount": child.amount,
-                "reason": child.reason,
-                "total_amount": exp.total_amount,
-                "remaining_amount": exp.remaining_amount
-            }
-            data.append(row)
+            data.append({
+            "designation":exp.desigination,
+            "petty_cash": exp.petty_cash,
+            "employee_name": exp.employee_name,
+            "month": exp.month,
+            "amount": exp.amount,
+            "expense_date": child.expense_date,
+            "receipt_image": child.receipt_image,
+            "expense_category": child.expense_category,
+            "expense_amount": child.amount,
+            "reason": child.reason,
+            "total_amount": exp.total_amount,
+            "remaining_amount": exp.remaining_amount
+        })
+            
     
     return data
