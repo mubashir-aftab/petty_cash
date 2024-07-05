@@ -30,17 +30,15 @@ def read_csv(docname):
 
     def extract_table_data(table):
         headers = [th.get_text(strip=True) for th in table.find_all('th')]
-<<<<<<< HEAD
+
         if not headers:  # If no headers, find the first row's cells as headers
             headers = [td.get_text(strip=True) for td in table.find('tr').find_all('td')]
         rows = table.find_all('tr')[1:]  # Skip header row
         table_data = []
 
-=======
         rows = table.find_all('tr')
         table_data = []
-        
->>>>>>> c48ebe391960f0096b9fd900fad1f762b6d49a93
+
         for row in rows:
             cells = row.find_all('td')
             if len(cells) == len(headers):
@@ -48,7 +46,7 @@ def read_csv(docname):
                 table_data.append(row_data)
         return table_data
 
-<<<<<<< HEAD
+
     def is_html(content):
         return '<table>' in content
 
@@ -69,12 +67,12 @@ def read_csv(docname):
                 account_details.append(row)
                 raw_data.append(row)
 
-=======
+
     def process_csv_reader(reader):
         for row in reader:
             if row:
                 detail = {
-                    'Número de Clientes': row.get('Número de Clientes', '').strip(), 
+                    'Número de Clientes': row.get('Número de Clientes', '').strip(),
                     'Nombre': row.get('Nombre', '').strip(),
                     'Producto': row.get('Producto', '').strip(),
                     'Moneda': row.get('Moneda', '').strip(),
@@ -89,7 +87,7 @@ def read_csv(docname):
 
     with open(file_path, mode='r', encoding='utf-8') as file:
         content = file.read()
-        
+
         if is_html(content):
             # Process HTML-embedded CSV
             table_data = process_html_content(content)
@@ -102,12 +100,12 @@ def read_csv(docname):
             reader = csv.DictReader(content.splitlines())
             process_csv_reader(reader)
 
->>>>>>> c48ebe391960f0096b9fd900fad1f762b6d49a93
+
     formatted_details_list = []
 
     for detail in account_details:
         formatted_detail = ""
-<<<<<<< HEAD
+
         currency = detail.get('Moneda')
         card_number = detail.get('Número de Tarjeta')
         reference_number = detail.get('Número de Referencia')
@@ -121,25 +119,18 @@ def read_csv(docname):
 
     formatted_details = '\n\n\n'.join(formatted_details_list)
     raw_data_str = '\n'.join([str(row) for row in raw_data])
-=======
-        for key, value in detail.items():
-            if value:
-                formatted_detail += f"{key}: {value}\n"
-        formatted_details_list.append(formatted_detail.strip())  
-    
-    formatted_details = '\n\n\n'.join(formatted_details_list)
-    raw_data_str = '\n'.join([str(row) for row in raw_data]) 
->>>>>>> c48ebe391960f0096b9fd900fad1f762b6d49a93
 
+    for key, value in detail.items():
+        if value:
+                formatted_detail += f"{key}: {value}\n"
+                formatted_details_list.append(formatted_detail.strip())
+
+    formatted_details = '\n\n\n'.join(formatted_details_list)
+    raw_data_str = '\n'.join([str(row) for row in raw_data])
     frappe.msgprint(_("Raw Data:"))
     frappe.msgprint(raw_data_str)
     frappe.msgprint(_("Formatted Details:"))
     frappe.msgprint(formatted_details)
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> c48ebe391960f0096b9fd900fad1f762b6d49a93
     return {
         'account_details': formatted_details,
         'raw_data': raw_data_str
